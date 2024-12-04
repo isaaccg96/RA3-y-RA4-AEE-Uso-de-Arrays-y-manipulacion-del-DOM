@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejemplos de Métodos de Arrays</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #333;
+        }
+
+        .method-section {
+            margin: 20px 0;
+        }
+
+        .method-header {
+            background-color: #757575;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: 'Silkscreen';
+        }
+
+        pre {
+            background-color: #f1f1f1;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        button {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="text-center my-4" style="color: white; font-family:'Silkscreen'">Ejemplos de Métodos de Arrays</h1>
+        <!-- Template for Method Sections -->
+        <div id="examples"></div>
+    </div>
+
+    <script>
+        const array = [10, 20, 30, 40, 50];
+
+        const examples = [
+            {
+                method: "1. Array.prototype.at()",
+                description: "Accede al elemento en una posición dada, permite índices negativos.",
+                example: `console.log(array.at(1)); // 20\nconsole.log(array.at(-1)); // 50`,
+                execute: () => {
+                    return `array.at(1) = ${array.at(1)}, array.at(-1) = ${array.at(-1)}`;
+                }
+            },
+            {
+                method: "2. Array.prototype.concat()",
+                description: "Combina arrays y devuelve un nuevo array.",
+                example: `let extra = [60, 70];\nlet combinado = array.concat(extra);\nconsole.log(combinado); // [10, 20, 30, 40, 50, 60, 70]`,
+                execute: () => {
+                    let extra = [60, 70];
+                    let combinado = array.concat(extra);
+                    return `Resultado: ${JSON.stringify(combinado)}`;
+                }
+            },
+            {
+                method: "3. Array.prototype.copyWithin()",
+                description: "Copia una parte del array dentro de sí mismo.",
+                example: `array.copyWithin(0, 3);\nconsole.log(array); // [40, 50, 30, 40, 50]`,
+                execute: () => {
+                    array.copyWithin(0, 3);
+                    return `Resultado: ${JSON.stringify(array)}`;
+                }
+            },
+            {
+                method: "4. Array.prototype.entries()",
+                description: "Crea un iterador de pares [índice, valor].",
+                example: `for (const [index, value] of array.entries()) {\n    console.log(index, value); // Índices y valores del array\n}`,
+                execute: () => {
+                    let result = [];
+                    for (const [index, value] of array.entries()) {
+                        result.push(`Índice: ${index}, Valor: ${value}`);
+                    }
+                    return result.join("\n");
+                }
+            },
+            {
+                method: "5. Array.prototype.every()",
+                description: "Verifica si todos los elementos cumplen una condición.",
+                example: `console.log(array.every(n => n > 20)); // true`,
+                execute: () => {
+                    return `Resultado: ${array.every(n => n > 20)}`;
+                }
+            },
+            {
+                method: "6. Array.prototype.fill()",
+                description: "Rellena el array con un valor desde un índice inicial a uno final.",
+                example: `array.fill(0, 1, 3);\nconsole.log(array); // [40, 0, 0, 40, 50]`,
+                execute: () => {
+                    array.fill(0, 1, 3);
+                    return `Resultado: ${JSON.stringify(array)}`;
+                }
+            },
+            {
+                method: "7. Array.prototype.filter()",
+                description: "Crea un nuevo array con elementos que cumplan una condición.",
+                example: `let filtrado = array.filter(n => n > 30);\nconsole.log(filtrado); // [40, 40, 50]`,
+                execute: () => {
+                    let filtrado = array.filter(n => n > 30);
+                    return `Resultado: ${JSON.stringify(filtrado)}`;
+                }
+            },
+            {
+                method: "8. Array.prototype.find()",
+                description: "Devuelve el primer elemento que cumpla con una condición.",
+                example: `console.log(array.find(n => n > 30)); // 40`,
+                execute: () => {
+                    return `Resultado: ${array.find(n => n > 30)}`;
+                }
+            },
+            {
+                method: "9. Array.prototype.findIndex()",
+                description: "Devuelve el índice del primer elemento que cumpla una condición.",
+                example: `console.log(array.findIndex(n => n > 30)); // 0`,
+                execute: () => {
+                    console.log(array);
+                    return `Resultado: ${array.findIndex(n => n > 30)}`;
+                }
+            },
+            {
+                method: "10. Array.prototype.findLast()",
+                description: "Devuelve el último elemento que cumpla una condición.",
+                example: `console.log(array.findLast(n => n > 30)); // 50`,
+                execute: () => {
+                    return `Resultado: ${array.findLast(n => n > 30)}`;
+                }
+            },
+            {
+                method: "11. Array.prototype.findLastIndex()",
+                description: "Índice del último elemento que cumpla una condición.",
+                example: `console.log(array.findLastIndex(n => n > 30)); // 4`,
+                execute: () => {
+                    return `Resultado: ${array.findLastIndex(n => n > 30)}`;
+                }
+            },
+            {
+                method: "12. Array.prototype.flat()",
+                description: "Aplana un array multidimensional.",
+                example: `let nested = [1, [2, [3, 4]]];\nconsole.log(nested.flat(2)); // [1, 2, 3, 4]`,
+                execute: () => {
+                    let nested = [1, [2, [3, 4]]];
+                    return `Resultado: ${JSON.stringify(nested.flat(2))}`;
+                }
+            },
+            {
+                method: "13. Array.prototype.flatMap()",
+                description: "Aplica una función y aplana el resultado.",
+                example: `let duplicados = [1, 2, 3];\nconsole.log(duplicados.flatMap(n => [n, n * 2])); // [1, 2, 2, 4, 3, 6]`,
+                execute: () => {
+                    let duplicados = [1, 2, 3];
+                    return `Resultado: ${JSON.stringify(duplicados.flatMap(n => [n, n * 2]))}`;
+                }
+            },
+            {
+                method: "14. Array.prototype.forEach()",
+                description: "Ejecuta una función por cada elemento.",
+                example: `array.forEach(n => console.log(n)); // 40, 0, 0, 40, 50`,
+                execute: () => {
+                    console.log(array);
+                    let result = [];
+                    array.forEach(n => result.push(n));
+                    return `Resultado: ${result.join(", ")}`;
+                }
+            },
+            {
+                method: "15. Array.prototype.includes()",
+                description: "Comprueba si el array contiene un valor.",
+                example: `console.log(array.includes(40)); // true`,
+                execute: () => {
+                    return `Resultado: ${array.includes(40)}`;
+                }
+            },
+            {
+                method: "16. Array.prototype.indexOf()",
+                description: "Encuentra el índice de un elemento.",
+                example: `console.log(array.indexOf(40)); // 0`,
+                execute: () => {
+                    return `Resultado: ${array.indexOf(40)}`;
+                }
+            },
+            {
+                method: "17. Array.prototype.join()",
+                description: "Combina los elementos del array en un string.",
+                example: `console.log(array.join("-")); // "40-0-0-40-50"`,
+                execute: () => {
+                    return `Resultado: ${array.join("-")}`;
+                }
+            },
+            {
+                method: "18. Array.prototype.keys()",
+                description: "Iterador de índices.",
+                example: `for (const key of array.keys()) {\n    console.log(key); // 0, 1, 2, 3, 4\n}`,
+                execute: () => {
+                    let result = [];
+                    for (const key of array.keys()) {
+                        result.push(key);
+                    }
+                    return `Resultado: ${result.join(", ")}`;
+                }
+            },
+            {
+                method: "19. Array.prototype.lastIndexOf()",
+                description: "Encuentra el último índice de un elemento.",
+                example: `console.log(array.lastIndexOf(40)); // 3`,
+                execute: () => {
+                    return `Resultado: ${array.lastIndexOf(40)}`;
+                }
+            },
+            {
+                method: "20. Array.prototype.map()",
+                description: "Crea un nuevo array con los resultados de la función aplicada.",
+                example: `let duplicados = array.map(n => n * 2);\nconsole.log(duplicados); // [80,0,0,80,100]`,
+                execute: () => {
+                    let duplicados = array.map(n => n * 2);
+                    return `Resultado: ${JSON.stringify(duplicados)}`;
+                }
+            },
+            {
+                method: "21. Array.prototype.pop()",
+                description: "Elimina el último elemento y lo devuelve.",
+                example: `let last = array.pop();\nconsole.log(last); // 50`,
+                execute: () => {
+                    let last = array.pop();
+                    return `Resultado: ${last}`;
+                }
+            },
+            {
+                method: "22. Array.prototype.push()",
+                description: "Añade un nuevo elemento al final del array.",
+                example: `array.push(60);\nconsole.log(array); // [40,0,0,40,60]`,
+                execute: () => {
+                    array.push(60);
+                    return `Resultado: ${JSON.stringify(array)}`;
+                }
+            },
+            {
+                method: "23. Array.prototype.reduce()",
+                description: "Aplica una función acumuladora a cada elemento del array.",
+                example: `let total = array.reduce((acc, n) => acc + n, 0);\nconsole.log(total); // 140`,
+                execute: () => {
+                    let total = array.reduce((acc, n) => acc + n, 0);
+                    return `Resultado: ${total}`;
+                }
+            },
+            {
+                method: "24. Array.prototype.reduceRight()",
+                description: "Aplica una función acumuladora a cada elemento del array, de derecha a izquierda.",
+                example: `let total = array.reduceRight((acc, n) => acc + n, 0);\nconsole.log(total); // 140`,
+                execute: () => {
+                    let total = array.reduceRight((acc, n) => acc + n, 0);
+                    return `Resultado: ${total}`;
+                }
+            },
+            {
+                method: "25. Array.prototype.reverse()",
+                description: "Invierte el orden de los elementos.",
+                example: `array.reverse();\nconsole.log(array); // [60,40,0,0,40]`,
+                execute: () => {
+                    array.reverse();
+                    return `Resultado: ${JSON.stringify(array)}`;
+                }
+            },
+            {
+                method: "26. Array.prototype.shift()",
+                description: "Elimina el primer elemento y lo devuelve.",
+                example: `let first = array.shift();\nconsole.log(first); // 60`,
+                execute: () => {
+                    let first = array.shift();
+                    return `Resultado: ${first}`;
+                }
+            },
+            {
+                method: "27. Array.prototype.slice()",
+                description: "Devuelve una copia superficial de una porción del array.",
+                example: `let part = array.slice(1, 3);\nconsole.log(part); // [0,0]`,
+                execute: () => {
+                    console.log(array);
+                    let part = array.slice(1, 3);
+                    return `Resultado: ${JSON.stringify(part)}`;
+                }
+            },
+            {
+                method: "28. Array.prototype.sort()",
+                description: "Ordena los elementos del array.",
+                example: `array.sort();\nconsole.log(array); // [0,0,40,40]`,
+                execute: () => {
+                    array.sort();
+                    return `Resultado: ${JSON.stringify(array)}`;
+                }
+            },
+            {
+                method: "29. Array.prototype.splice()",
+                description: "Cambia el contenido de un array eliminando, reemplazando o añadiendo elementos.",
+                example: `array.splice(1, 1, 100);\nconsole.log(array); // [0,100,40,40]`,
+                execute: () => {
+                    array.splice(1, 1, 100);
+                    return `Resultado: ${JSON.stringify(array)}`;
+                }
+            },
+            {
+                method: "30. Array.prototype.toLocaleString()",
+                description: "Devuelve una cadena representando los elementos del array.",
+                example: `console.log(array.toLocaleString()); // "0,100,40,40"`,
+                execute: () => {
+                    return `Resultado: ${array.toLocaleString()}`;
+                }
+            },
+            {
+                method: "31. Array.prototype.toString()",
+                description: "Devuelve una cadena representando los elementos del array.",
+                example: `console.log(array.toString()); // "0,100,40,40"`,
+                execute: () => {
+                    return `Resultado: ${array.toString()}`;
+                }
+            },
+            {
+                method: "32. Array.prototype.unshift()",
+                description: "Añade un nuevo elemento al principio del array.",
+                example: `array.unshift(20);\nconsole.log(array); // [20,0,100,40,40]`,
+                execute: () => {
+                    array.unshift(20);
+                    return `Resultado: ${JSON.stringify(array)}`;
+                }
+            },
+            {
+                method: "33. Array.prototype.values()",
+                description: "Devuelve un iterador de los valores de los elementos.",
+                example: `for (const value of array.values()) {\n    console.log(value); // 20, 0, 100, 40, 40\n}`,
+                execute: () => {
+                    let result = [];
+                    for (const value of array.values()) {
+                        result.push(value);
+                    }
+                    return `Resultado: ${result.join(", ")}`;
+                }
+            },
+            {
+                method: "34. Array.prototype.copyWithin()",
+                description: "Copia una parte del array dentro del mismo array.",
+                example: `array.copyWithin(1, 3);\nconsole.log(array); // [20,40,40,40,40]`,
+                execute: () => {
+                    array.copyWithin(1, 3);
+                    return `Resultado: ${JSON.stringify(array)}`;
+                }
+            },
+            {
+                method: "35. Array.prototype.from()",
+                description: "Convierte un objeto iterable en un array.",
+                example: `let str = 'hello';\nlet arr = Array.from(str);\nconsole.log(arr); // ['h', 'e', 'l', 'l', 'o']`,
+                execute: () => {
+                    let str = 'hello';
+                    let arr = Array.from(str);
+                    return `Resultado: ${JSON.stringify(arr)}`;
+                }
+            },
+            {
+                method: "36. Array.prototype.flat()",
+                description: "Convierte un array de arrays en un solo array plano.",
+                example: `let nested = [1, [2, [3, 4]]];\nconsole.log(nested.flat(2)); // [1, 2, 3, 4]`,
+                execute: () => {
+                    let nested = [1, [2, [3, 4]]];
+                    return `Resultado: ${JSON.stringify(nested.flat(2))}`;
+                }
+            },
+            {
+                method: "37. Array.prototype.flatMap()",
+                description: "Aplica una función a cada elemento y aplana el resultado.",
+                example: `let duplicados = [1, 2, 3];\nconsole.log(duplicados.flatMap(n => [n, n * 2])); // [1, 2, 2, 4, 3, 6]`,
+                execute: () => {
+                    let duplicados = [1, 2, 3];
+                    return `Resultado: ${JSON.stringify(duplicados.flatMap(n => [n, n * 2]))}`;
+                }
+            },
+            {
+                method: "38. Array.prototype.includes()",
+                description: "Verifica si un valor está presente en el array.",
+                example: `console.log(array.includes(40)); // true`,
+                execute: () => {
+                    console.log(array);
+                    return `Resultado: ${array.includes(40)}`;
+                }
+            },
+            {
+                method: "39. Array.prototype.indexOf()",
+                description: "Devuelve el primer índice de un elemento.",
+                example: `console.log(array.indexOf(40)); // 1`,
+                execute: () => {
+                    return `Resultado: ${array.indexOf(40)}`;
+                }
+            }
+        ];
+
+
+        // Renderizar los ejemplos
+        const examplesContainer = document.getElementById('examples');
+        examples.forEach((example, index) => {
+            const exampleSection = document.createElement('div');
+            exampleSection.classList.add('method-section');
+            exampleSection.innerHTML = `
+                <div class="method-header">
+                    <h4>${example.method}</h4>
+                    <p>${example.description}</p>
+                    <button class="btn btn-success" onclick="executeExample(${index})">Reproducir ejemplo</button>
+                    <button class="btn btn-danger" onclick="closeExample(${index})">Cerrar ejemplo</button>
+                </div>
+                <div id="example-${index}" class="example-content" style="display: none;">
+                    <pre>${example.example}</pre>
+                    <p style = "color: white">Ejecucion real:</p>
+                    <pre id="result-${index}"></pre>
+                </div>
+            `;
+            examplesContainer.appendChild(exampleSection);
+        });
+
+        function executeExample(index) {
+            const result = examples[index].execute();
+            document.getElementById(`result-${index}`).textContent = result;
+            document.getElementById(`example-${index}`).style.display = 'block';
+        }
+
+        function closeExample(index) {
+            document.getElementById(`example-${index}`).style.display = 'none';
+        }
+    </script>
+</body>
+
+</html>
